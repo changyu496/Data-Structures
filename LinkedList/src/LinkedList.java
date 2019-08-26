@@ -93,6 +93,40 @@ public class LinkedList<E> {
         return false;
     }
 
+    public void set(int index, E e) {
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("Set failed,illegal index");
+        }
+        Node cur = dummyHead.next;
+        for (int i = 0; i < index; i++) {
+            cur = cur.next;
+        }
+        cur.e = e;
+    }
+
+    public E remove(int index){
+        if(index<0||index>size){
+            throw new IllegalArgumentException("Remove failed,illegal index");
+        }
+        Node prev = dummyHead;
+        for (int i = 0; i < index; i++) {
+            prev = prev.next;
+        }
+        Node<E> delNode = prev.next;
+        prev.next = delNode.next;
+        delNode.next = null;
+        size--;
+        return delNode.e;
+    }
+
+    public E removeFirst(){
+        return remove(0);
+    }
+
+    public E removeLast(){
+        return remove(size-1);
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
