@@ -45,7 +45,7 @@ public class LinkedList<E> {
     }
 
     public void add(int index, E e) {
-        if (0 < index || index > size) {
+        if (index < 0 || index > size) {
             throw new IllegalArgumentException("Add failed,illegal index");
         }
         Node prev = dummyHead;
@@ -64,4 +64,43 @@ public class LinkedList<E> {
         add(size, e);
     }
 
+    public E get(int index) {
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("Get failed,illegal index");
+        }
+        Node cur = dummyHead.next;
+        for (int i = 0; i < index; i++) {
+            cur = cur.next;
+        }
+        return (E) cur.e;
+    }
+
+    public E getFirst() {
+        return get(0);
+    }
+
+    public E getLast() {
+        return get(size - 1);
+    }
+
+    public boolean contains(E e) {
+        Node cur = dummyHead.next;
+        for (int i = 0; i < size; i++) {
+            if (cur.e.equals(e)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        Node cur;
+        for (cur = dummyHead.next; cur != null; cur = cur.next) {
+            stringBuilder.append(cur.e + "->");
+        }
+        stringBuilder.append("NULL");
+        return stringBuilder.toString();
+    }
 }
