@@ -13,7 +13,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int opCount = 100000;
+        int opCount = 1000;
         long start1 = System.nanoTime();
         testQueue(new ArrayQueue(),opCount);
         long end1 = System.nanoTime();
@@ -22,5 +22,9 @@ public class Main {
         testQueue(new LoopQueue(),opCount);
         long end2 = System.nanoTime();
         System.out.println("LoopQueue :"+(end2-start2)/1000000000.0 +"秒");
+        long start3 = System.nanoTime();
+        testQueue(new LinkedListQueue(),opCount);
+        long end3 = System.nanoTime();
+        System.out.println("LinkedListQueue:"+(end3-start3)/1000000000.0 +"秒");
     }
 }
