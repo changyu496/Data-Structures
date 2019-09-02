@@ -11,8 +11,15 @@ public class Main {
 //        bst.preOrderNR();
 //        bst.inOrder();
 //        bst.postOrder();
-        bst.levelOrder();
+//        bst.levelOrder();
 //        System.out.println(bst);
+//        System.out.println(bst.minmum());
+//        System.out.println(bst.maxmum());
+        System.out.println(bst);
+        bst.removeMin();
+        System.out.println(bst);
+        bst.removeMax();
+        System.out.println(bst);
     }
 
 

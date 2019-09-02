@@ -2,8 +2,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
-public class BST<E extends Comparable> {
-    private class Node<E extends Comparable> {
+public class BST<E extends Comparable<E>> {
+    private class Node {
         private E e;
         private Node left;
         private Node right;
@@ -121,16 +121,78 @@ public class BST<E extends Comparable> {
     public void levelOrder() {
         Queue<Node> queue = new LinkedList<>();
         queue.add(root);
-        while (!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             Node node = queue.remove();
             System.out.println(node);
-            if(node.left!=null){
+            if (node.left != null) {
                 queue.add(node.left);
             }
-            if(node.right!=null){
+            if (node.right != null) {
                 queue.add(node.right);
             }
         }
+    }
+
+    public E minimum() {
+        if (size == 0) {
+            throw new IllegalArgumentException("BST is empty");
+        }
+        return minimum(root).e;
+    }
+
+    private Node minimum(Node node) {
+        if (node.left == null) {
+            return node;
+        }
+        return minimum(node.left);
+    }
+
+    public E removeMin(){
+        Node ret = minimum(root);
+        removeMin(root);
+        return ret.e;
+    }
+
+    private Node removeMin(Node node){
+        if(node.left == null){
+            Node rightNode = node.right;
+            node.right = null;
+            size--;
+            return rightNode;
+        }
+        node.left = removeMin(node.left);
+        return node;
+    }
+
+    public E maximum() {
+        if (size == 0) {
+            throw new IllegalArgumentException("BST is empty");
+        }
+        return maximum(root).e;
+    }
+
+    private Node maximum(Node node) {
+        if (node.right == null) {
+            return node;
+        }
+        return maximum(node.right);
+    }
+
+    public E removeMax(){
+        Node max = maximum(root);
+        removeMax(root);
+        return max.e;
+    }
+
+    private Node removeMax(Node node){
+        if(node.right == null){
+            Node leftNode = node.left;
+            node.left = null;
+            size--;
+            return leftNode;
+        }
+        node.right = removeMax(node.right);
+        return node;
     }
 
     @Override
